@@ -16,7 +16,7 @@ import java.io.File;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
-public class TestPracticeForm extends BaseTest {
+public class TestPracticeForm {
 
     final String firstName = "Adel";
     final String lastName = "Zakiev";
@@ -36,13 +36,36 @@ public class TestPracticeForm extends BaseTest {
 
     private RegistrationForm registrationForm = new RegistrationForm();
 
+    @BeforeAll
+    static void setUp() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browserSize = "1920x1080";
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC",true);
+        capabilities.setCapability("enableVideo",true);
+        Configuration.browserCapabilities = capabilities;
+    }
+
+    @AfterEach
+    void addAttachments() {
+        Attach.screenshotAs("Screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+    }
+
     @Test
     void entryPoint() {
 //        Step1OpenUrl();
 //        Step2FillFormRegistrations();
 //        Step3DataCheck();
         //Открытие сервера
-        open("https://demoqa.com/automation-practice-form");
+//        open("https://demoqa.com/automation-practice-form");
+        open("/automation-practice-form");
 
         registrationForm
                 .firstNameInput(firstName)
