@@ -8,13 +8,7 @@ repositories {
 }
 
 def allureVersion = "2.17.2",
-    junitVersion = "5.8.2",
-    jacksonDatabind = "2.10.3",
-    commons = "2.4",
-    assertj = "3.19.0",
-    selenide = "6.2.1",
-    slf4jSimple = "1.7.29",
-    recursiveAssertionAssertj = "1.0.1"
+    junitVersion = "5.8.2"
 
 allure {
     report {
@@ -32,19 +26,14 @@ allure {
 }
 
 dependencies {
-    implementation "com.github.vladislavsevruk:recursive-assertion-assertj:$recursiveAssertionAssertj"
     testImplementation(
-            "com.codeborne:selenide:$selenide",
-            "org.assertj:assertj-core:$assertj",
-            "commons-io:commons-io:$commons",
-            "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabind",
+            "com.codeborne:selenide:6.2.1",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly(
-            "org.slf4j:slf4j-simple:$slf4jSimple",
+            "org.slf4j:slf4j-simple:1.7.29",
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
-
 
 tasks.withType(Test) {
     useJUnitPlatform()
