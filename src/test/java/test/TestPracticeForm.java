@@ -1,16 +1,22 @@
 package test;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import helpers.Attach;
 import io.qameta.allure.Step;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import pageObject.RegistrationForm;
 
 import java.io.File;
 
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
-public class TestPracticeForm {
+public class TestPracticeForm extends BaseTest {
 
     final String firstName = "Adel";
     final String lastName = "Zakiev";
@@ -28,13 +34,7 @@ public class TestPracticeForm {
     final String state = "NCR";
     final String city = "Delhi";
 
-    final private RegistrationForm registrationForm = new RegistrationForm();
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-    }
+    private RegistrationForm registrationForm = new RegistrationForm();
 
     @Test
     void entryPoint() {
@@ -46,7 +46,7 @@ public class TestPracticeForm {
     @Step("Открыть страницу")
     void Step1OpenUrl() {
         //Открытие сервера
-        open("/automation-practice-form");
+        open("https://demoqa.com/automation-practice-form");
     }
 
     @Step("Заполнение формы регистрации")
