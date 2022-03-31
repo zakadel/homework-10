@@ -16,7 +16,6 @@ public class RegistrationForm {
     final private CalendarComponent calendarComponent = new CalendarComponent();
     final private ResultModal resultModal = new ResultModal();
 
-    final private SelenideElement headerTitle = $(".practice-form-wrapper");
     final private SelenideElement firstNameInput = $("#firstName");
     final private SelenideElement lastNameInput = $("#lastName");
     final private SelenideElement emailInput = $("#userEmail");
@@ -30,14 +29,6 @@ public class RegistrationForm {
     final private SelenideElement stateInput = $("#state");
     final private SelenideElement cityInput = $("#city");
     final private SelenideElement submitButton = $("#submit");
-
-
-    public RegistrationForm openPage() {
-        open("/automation-practice-form");
-        headerTitle.shouldHave(text("Student Registration Form"));
-        return this;
-    }
-
 
     public RegistrationForm firstNameInput(String firstNameInput) {
         this
