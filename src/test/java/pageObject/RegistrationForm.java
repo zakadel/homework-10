@@ -24,7 +24,6 @@ public class RegistrationForm {
     final private SelenideElement birthDateInput = $("#dateOfBirthInput");
     final private SelenideElement subjectsInput = $("#subjectsInput");
     final private SelenideElement hobbiesInput = $(".practice-form-wrapper #hobbiesWrapper");
-    final private SelenideElement pictureUploadInput = $("#uploadPicture");
     final private SelenideElement addressInput = $("#currentAddress");
     final private SelenideElement stateInput = $("#state");
     final private SelenideElement cityInput = $("#city");
@@ -87,12 +86,6 @@ public class RegistrationForm {
                     .$(byText(hobby))
                     .click();
         }
-        return this;
-    }
-
-    public RegistrationForm picture(File picture) {
-        pictureUploadInput
-                .uploadFile(picture);
         return this;
     }
 
