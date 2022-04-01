@@ -16,7 +16,7 @@ import java.io.File;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
-public class TestPracticeForm {
+public class TestPracticeForm extends BaseTest{
 
     final String firstName = "Adel";
     final String lastName = "Zakiev";
@@ -29,34 +29,12 @@ public class TestPracticeForm {
     final String birthDate = this.birthDateDay + " " + this.birthDateMouth + "," + this.birthDateYear;
     final String subjects = "Computer Science";
     final String[] hobbies = {"Sports", "Reading"};
-    final File picture = new File("src/test/resources/test.jpg");
+    //final File picture = new File("src/test/resources/test.jpg");
     final String address = "Kazan";
     final String state = "NCR";
     final String city = "Delhi";
 
-    private RegistrationForm registrationForm = new RegistrationForm();
 
-    @BeforeAll
-    static void setUp() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-//        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC",true);
-        capabilities.setCapability("enableVideo",true);
-        Configuration.browserCapabilities = capabilities;
-    }
-
-    @AfterEach
-    void addAttachments() {
-        Attach.screenshotAs("Screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
-    }
 
     @Test
     void entryPoint() {
@@ -65,6 +43,7 @@ public class TestPracticeForm {
 //        Step3DataCheck();
         //Открытие сервера
 //        open("https://demoqa.com/automation-practice-form");
+        final RegistrationForm registrationForm = new RegistrationForm();
         open("/automation-practice-form");
 
         registrationForm
@@ -76,7 +55,7 @@ public class TestPracticeForm {
                 .birthDate(birthDateYear, birthDateMouth, birthDateDay)
                 .subjects(subjects)
                 .hobbies(hobbies)
-                .picture(picture)
+                //.picture(picture)
                 .address(address)
                 .state(state)
                 .city(city)
@@ -92,50 +71,50 @@ public class TestPracticeForm {
                 .checkResultInModal("Mobile", mobile)
                 .checkResultInModal("Subjects", subjects)
                 .checkResultInModal("Hobbies", String.join(", ", hobbies))
-                .checkResultInModal("Picture", picture.getName())
+                //.checkResultInModal("Picture", picture.getName())
                 .checkResultInModal("Address", address)
                 .checkResultInModal("State and City", state + " " + city);
     }
-
-    @Step("Открыть страницу")
-    void Step1OpenUrl() {
-        //Открытие сервера
-        open("https://demoqa.com/automation-practice-form");
-
-
-    }
-
-    @Step("Заполнение формы регистрации")
-    void Step2FillFormRegistrations() {
-        registrationForm
-                .firstNameInput(firstName)
-                .lastName(lastName)
-                .userEmail(email)
-                .gender(gender)
-                .mobile(mobile)
-                .birthDate(birthDateYear, birthDateMouth, birthDateDay)
-                .subjects(subjects)
-                .hobbies(hobbies)
-                .picture(picture)
-                .address(address)
-                .state(state)
-                .city(city)
-                .submitForm();
-    }
-
-    @Step("Проверка данных")
-    void Step3DataCheck() {
-        registrationForm
-                .checkResultInModal("Student Name", firstName + " " + lastName)
-                .checkResultInModal("Student Email", email)
-                .checkResultInModal("Gender", gender)
-                .checkResultInModal("Mobile", mobile)
-                .checkResultInModal("Date of Birth", birthDate)
-                .checkResultInModal("Mobile", mobile)
-                .checkResultInModal("Subjects", subjects)
-                .checkResultInModal("Hobbies", String.join(", ", hobbies))
-                .checkResultInModal("Picture", picture.getName())
-                .checkResultInModal("Address", address)
-                .checkResultInModal("State and City", state + " " + city);
-    }
+//
+//    @Step("Открыть страницу")
+//    void Step1OpenUrl() {
+//        //Открытие сервера
+//        open("https://demoqa.com/automation-practice-form");
+//
+//
+//    }
+//
+//    @Step("Заполнение формы регистрации")
+//    void Step2FillFormRegistrations() {
+//        registrationForm
+//                .firstNameInput(firstName)
+//                .lastName(lastName)
+//                .userEmail(email)
+//                .gender(gender)
+//                .mobile(mobile)
+//                .birthDate(birthDateYear, birthDateMouth, birthDateDay)
+//                .subjects(subjects)
+//                .hobbies(hobbies)
+//                .picture(picture)
+//                .address(address)
+//                .state(state)
+//                .city(city)
+//                .submitForm();
+//    }
+//
+//    @Step("Проверка данных")
+//    void Step3DataCheck() {
+//        registrationForm
+//                .checkResultInModal("Student Name", firstName + " " + lastName)
+//                .checkResultInModal("Student Email", email)
+//                .checkResultInModal("Gender", gender)
+//                .checkResultInModal("Mobile", mobile)
+//                .checkResultInModal("Date of Birth", birthDate)
+//                .checkResultInModal("Mobile", mobile)
+//                .checkResultInModal("Subjects", subjects)
+//                .checkResultInModal("Hobbies", String.join(", ", hobbies))
+//                .checkResultInModal("Picture", picture.getName())
+//                .checkResultInModal("Address", address)
+//                .checkResultInModal("State and City", state + " " + city);
+//    }
 }
